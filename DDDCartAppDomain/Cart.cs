@@ -16,7 +16,7 @@ namespace DDDCartAppDomain
 
 		public void Apply(AddProductEvent addProductEvent)
 		{
-			_products.Add(new Product());
+			_products.Add(addProductEvent.Product);
 		}
 	}
 }
