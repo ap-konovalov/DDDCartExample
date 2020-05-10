@@ -41,7 +41,7 @@ namespace DDDCArtAppTests
 			_cart.Apply(productAddedEvent);
 
 			Assert.NotNull(_cart.Products.First().Id);
-			Assert.True(_cart.Products.First().Id == _product.Id);
+			Assert.AreEqual(_product , _cart.Products.First());
 		}
 	}
 }
