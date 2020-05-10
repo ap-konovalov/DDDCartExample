@@ -1,3 +1,4 @@
+using DDDCartAppDomain;
 using NUnit.Framework;
 
 namespace DDDCArtAppTests
@@ -10,9 +11,9 @@ namespace DDDCArtAppTests
 		}
 
 		[Test]
-		public void Test1()
+		public void WhenAddProductToCartEventReceived_ThenProductShouldBeAdded()
 		{
-			Assert.Pass();
+			Cart cart = new Cart();
 		}
 	}
 }
