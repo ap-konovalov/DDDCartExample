@@ -14,6 +14,7 @@ namespace DDDCArtAppTests
 		public void WhenAddProductToCartEventReceived_ThenProductShouldBeAdded()
 		{
 			Cart cart = new Cart();
+			
 		}
 	}
 }
