@@ -4,4 +4,8 @@
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="EventFlow" Version="0.77.4077" />
+    </ItemGroup>
+
 </Project>
