@@ -9,38 +9,39 @@ namespace DDDCArtAppTests
 	{
 		private Cart _cart;
 		private CartId _cartId;
+		private Product _product;
+		private ProductId _productId;
 
 		[SetUp]
 		public void Setup()
 		{
 			_cartId = new CartId($"cart-{Guid.NewGuid()}");
 			_cart = new Cart(_cartId);
+
+			_productId = new ProductId(Guid.NewGuid());
+			_product = new Product(_productId);
 		}
 
 		[Test]
 		public void WhenAddProductToCartEventReceived_ThenCartShouldContainOneProduct()
 		{
-			//ARANGE
-			AddProductEvent addProductEvent = new AddProductEvent();
+			ProductAddedEvent productAddedEvent = new ProductAddedEvent(_product);
 
-			//ACT
-			_cart.Apply(addProductEvent);
+			_cart.Apply(productAddedEvent);
 
-			//ASSERT
-			Assert.NotNull(_cart.Products);
+ 			Assert.NotNull(_cart.Products);
 			Assert.True(_cart.Products.Count == 1);
 		}
 
-		// [Test]
-		// public void WhenAddProductToCartEventReceived_ThenCartProductIsShoulBeEqualProductIdFromEvent()
-		// {
-		// 	var firstProduct = cart.Products.First();
-		// 	Product product = new Product(productId);
-		//
-		// 	
-		// 	Assert.NotNull(firstProduct.Id);
-		// 	Assert.True(firstProduct.Id == productId);
-		//
+		[Test]
+		public void WhenAddProductToCartEventReceived_ThenCartProductIsShouldBeEqualProductIdFromEvent()
+		{
+			ProductAddedEvent productAddedEvent = new ProductAddedEvent(_product);
+			
+			_cart.Apply(productAddedEvent);
+
+			Assert.NotNull(_cart.Products.First().Id);
+			Assert.True(_cart.Products.First().Id == _product.Id);
+		}
 	}
 }
-
