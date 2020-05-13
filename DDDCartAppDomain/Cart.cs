@@ -4,7 +4,7 @@ using EventFlow.Aggregates;
 
 namespace DDDCartAppDomain
 {
-	public class Cart : AggregateRoot<Cart,CartId>
+	public class Cart : AggregateRoot<Cart,CartId>,IEmit<ProductAddedEvent>
 	{
 		public List<Product> Products => _products;
 		private readonly List<Product> _products;
@@ -21,7 +21,7 @@ namespace DDDCartAppDomain
 
 		public void AddProduct(Product product)
 		{
-			throw new NotImplementedException();
+			Emit(new ProductAddedEvent(product));
 		}
 	}
 }
