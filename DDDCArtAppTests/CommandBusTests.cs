@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DDDCartAppDomain;
 using EventFlow;
+using EventFlow.Aggregates;
 using EventFlow.DependencyInjection.Extensions;
 using EventFlow.Extensions;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,10 +27,17 @@ namespace DDDCArtAppTests
 				.CreateResolver();
 
 			var commandBus = resolver.Resolve<ICommandBus>();
+			var aggregateStore = resolver.Resolve<IAggregateStore>();
 
+			CartId cartId = CartId.NewCartId();
+			
 			await commandBus.PublishAsync(
-				new AddProductCommand(CartId.NewCartId(), 
+				new AddProductCommand(cartId, 
 				new ProductId(Guid.Empty)), CancellationToken.None);
+
+			Cart cart = await aggregateStore.LoadAsync<Cart, CartId>(cartId, CancellationToken.None);
+			
+			Assert.AreEqual(1 , cart.Products.Count);
 		}
 	}
 }
