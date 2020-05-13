@@ -2,7 +2,7 @@
 
 namespace DDDCartAppDomain
 {
-	internal interface IProductRepository
+	public interface IProductRepository
 	{
 		Task<Product> GetProduct(ProductId commandProductId);
 	}

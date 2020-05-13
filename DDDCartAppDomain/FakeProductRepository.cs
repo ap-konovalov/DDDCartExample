@@ -4,10 +4,9 @@ using System.Threading.Tasks;
 
 namespace DDDCartAppDomain
 {
-	class FakeProductRepository : IProductRepository
+	public class FakeProductRepository : IProductRepository
 	{
 		private readonly Dictionary<ProductId, Product> _repository;
-		
 
 		public FakeProductRepository()
 		{
@@ -16,8 +15,8 @@ namespace DDDCartAppDomain
 			{
 				{productId, new Product(productId, "Колбаса", 200.00)}
 			};
-			
 		}
+
 		public Task<Product> GetProduct(ProductId productId)
 		{
 			return Task.FromResult(_repository[productId]);

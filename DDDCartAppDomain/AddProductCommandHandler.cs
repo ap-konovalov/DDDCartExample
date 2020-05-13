@@ -7,11 +7,16 @@ namespace DDDCartAppDomain
 {
 	public class AddProductCommandHandler : CommandHandler<Cart, CartId, IExecutionResult, AddProductCommand>
 	{
-		private readonly IProductRepository _productRepository;
-		
-		public override async Task<IExecutionResult> ExecuteCommandAsync(Cart aggregate, AddProductCommand command, CancellationToken cancellationToken)
+		public AddProductCommandHandler(IProductRepository productRepository)
 		{
-			
+			_productRepository = productRepository;
+		}
+
+		private readonly IProductRepository _productRepository;
+
+		public override async Task<IExecutionResult> ExecuteCommandAsync(Cart aggregate, AddProductCommand command,
+			CancellationToken cancellationToken)
+		{
 			Product product = await _productRepository.GetProduct(command.ProductId);
 			aggregate.AddProduct(product);
 
