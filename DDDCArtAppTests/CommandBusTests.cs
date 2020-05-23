@@ -14,7 +14,7 @@ namespace DDDCArtAppTests
 	public class CommandBusTests
 	{
 		[Test]
-		public async Task CommandBusTest()
+		public async Task CommandBus_AddProduct()
 		{
 			var services = new ServiceCollection();
 			services.AddSingleton<IProductRepository, FakeProductRepository>();

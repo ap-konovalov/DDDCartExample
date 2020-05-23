@@ -5,7 +5,7 @@ using NUnit.Framework;
 
 namespace DDDCArtAppTests
 {
-	public class Tests
+	public class WhenProductAddedEventReceived
 	{
 		private Cart _cart;
 		private CartId _cartId;
@@ -22,7 +22,7 @@ namespace DDDCArtAppTests
 		}
 
 		[Test]
-		public void WhenProductAddedEventReceived_ThenCartShouldContainOneProduct()
+		public void ThenCartShouldContainOneProduct()
 		{
 			ProductAddedEvent productAddedEvent = new ProductAddedEvent(_product);
 
@@ -33,7 +33,7 @@ namespace DDDCArtAppTests
 		}
 
 		[Test]
-		public void WhenProductAddedEventReceived_ThenCartProductShouldBeEqualProductIdFromEvent()
+		public void ThenCartProductShouldBeEqualProductIdFromEvent()
 		{
 			ProductAddedEvent productAddedEvent = new ProductAddedEvent(_product);
 			
@@ -44,7 +44,7 @@ namespace DDDCArtAppTests
 		}
 
 		[Test]
-		public void WhenAddProductToCart_ThenCartShouldBeContainProductNameFromEvent()
+		public void ThenCartShouldBeContainProductNameFromEvent()
 		{
 			ProductAddedEvent productAddedEvent = new ProductAddedEvent(_product);
 			
@@ -55,7 +55,7 @@ namespace DDDCArtAppTests
 		}
 
 		[Test]
-		public void WhenProductAddedEventReceived_ThenCartProductPriceShouldBeEqualProductPriceFromEvent()
+		public void ThenCartProductPriceShouldBeEqualProductPriceFromEvent()
 		{
 			ProductAddedEvent productAddedEvent = new ProductAddedEvent(_product);
 			
@@ -65,7 +65,7 @@ namespace DDDCArtAppTests
 		}
 
 		[Test]
-		public void WhenTwoProductAddedEventReceived_ThenCArtShouldContainTwoProducts()
+		public void Twice_ThenCArtShouldContainTwoProducts()
 		{
 			ProductAddedEvent firstProductAddedEvent = new ProductAddedEvent(_product);
 			ProductAddedEvent secondProductAddedEvent = new ProductAddedEvent(_product);
