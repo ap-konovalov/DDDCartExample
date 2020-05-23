@@ -4,7 +4,7 @@ namespace DDDCartAppDomain
 {
 	public class ProductRemovedEvent: IAggregateEvent<Cart, CartId>
 	{
-		public Product Product { get; set; }
+		public Product Product { get; }
 
 		public ProductRemovedEvent(Product product)
 		{

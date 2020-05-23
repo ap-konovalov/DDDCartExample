@@ -5,26 +5,26 @@ using EventFlow.Commands;
 
 namespace DDDCartAppDomain
 {
-	public class AddProductCommandHandler : CommandHandler<Cart, CartId, IExecutionResult, AddProductCommand>
+	public class RemoveProductCommandHandler: CommandHandler<Cart, CartId, IExecutionResult, RemoveProductCommand>
 	{
-		public AddProductCommandHandler(IProductRepository productRepository)
+		private readonly IProductRepository _productRepository;
+		
+		public RemoveProductCommandHandler(IProductRepository productRepository)
 		{
 			_productRepository = productRepository;
 		}
 
-		private readonly IProductRepository _productRepository;
-
-		public override async Task<IExecutionResult> ExecuteCommandAsync(Cart aggregate, AddProductCommand command,
+		public override async Task<IExecutionResult> ExecuteCommandAsync(Cart aggregate, RemoveProductCommand command,
 			CancellationToken cancellationToken)
 		{
 			Product product = await _productRepository.GetProduct(command.ProductId);
-			
+
 			if (product == null)
 			{
 				return ExecutionResult.Failed();
 			}
 			
-			aggregate.AddProduct(product);
+			aggregate.RemoveProduct(product);
 
 			return ExecutionResult.Success();
 		}
