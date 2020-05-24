@@ -12,6 +12,8 @@ using System.Data.Common;
 using DDDCArtAppTests.DSL;
 using EventFlow.EntityFramework.Extensions;
 using EventFlow.EntityFramework;
+using EventFlow.RabbitMQ;
+using EventFlow.RabbitMQ.Extensions;
 
 namespace DDDCArtAppTests
 {
@@ -20,6 +22,8 @@ namespace DDDCArtAppTests
 		[Test]
 		public async Task AddProductToCart()
 		{
+			var rmqUri = new Uri("amqp://admin:mypass@localhost:5672/vhost");
+			
 			var services = new ServiceCollection();
 			services.AddTransient<IProductRepository, FakeProductRepository>();
 			using var resolver = EventFlowOptions.New
@@ -31,6 +35,7 @@ namespace DDDCArtAppTests
 				.AddEvents(typeof(ProductAddedEvent))
 				.AddCommands(typeof(AddProductCommand))
 				.AddCommandHandlers(typeof(AddProductCommandHandler))
+				.PublishToRabbitMq(RabbitMqConfiguration.With(rmqUri))
 				.CreateResolver();
 			
 			var commandBus = resolver.Resolve<ICommandBus>();
