@@ -6,3 +6,14 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     ports:
       - "3306:3306"
+
+  rabbitmq:
+    image: library/rabbitmq:3.8-management
+    container_name: rabbitmq-forDDD
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=mypass
+      - RABBITMQ_DEFAULT_VHOST=vhost
